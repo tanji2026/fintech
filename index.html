@@ -5,36 +5,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>碳吉 TanJi - 永續投資導航</title>
 <style>
-body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f4f1; color: #2c3e50; display: flex; justify-content: center; }
-.app-container { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
-header { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; padding: 20px 15px; text-align: center; border-radius: 0 0 15px 15px; }
-header h1 { margin: 0; font-size: 24px; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f0f4f1; color: #2c3e50; display: flex; justify-content: center; }
+.app-container { width: 100%; max-width: 480px; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.05); position: relative; overflow-x: hidden; }
+header { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; padding: 20px 15px; text-align: center; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; }
+header h1 { margin: 0; font-size: 24px; letter-spacing: 1px; }
 header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-.search-bar { padding: 15px; }
-.search-bar input { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 25px; font-size: 16px; box-sizing: border-box; }
+.search-bar { padding: 15px; background: #ffffff; }
+.search-bar input { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 25px; font-size: 16px; box-sizing: border-box; outline: none; transition: border-color 0.3s; }
+.search-bar input:focus { border-color: #4caf50; }
 .dashboard { padding: 10px 15px; }
-.card { background: #fff; border: 1px solid #e8eee9; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.card { background: #ffffff; border: 1px solid #e8eee9; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
 .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 10px; }
-.card-title { margin: 0; font-size: 18px; color: #2e7d32; }
-.badge { background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 14px; font-weight: bold; }
-.data-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 15px; }
+.card-title { margin: 0; font-size: 18px; color: #2e7d32; font-weight: bold;}
+.badge { background-color: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 14px; font-weight: bold; }
+.data-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 15px; align-items: center;}
 .data-label { color: #7f8c8d; }
 .data-value { font-weight: bold; }
-.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-top: 5px; }
-.progress-bar { height: 8px; border-radius: 8px; background-color: #4caf50; }
-.ai-summary { background: #f9fbf9; padding: 10px; border-radius: 8px; font-size: 14px; line-height: 1.5; margin-top: 15px; border-left: 4px solid #4caf50; }
-.impact-section { background: #2e7d32; color: white; border-radius: 12px; padding: 20px 15px; text-align: center; margin-top: 15px; }
-.impact-number { font-size: 32px; font-weight: bold; margin: 10px 0; }
-.fab { position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; background: #fff; border: 3px solid #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(0,0,0,0.15); cursor: pointer; font-size: 12px; color: #2e7d32; font-weight: bold; z-index: 100; }
-.chat-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 99; }
-.chat-panel { display: none; position: fixed; bottom: 100px; right: 25px; width: calc(100% - 80px); max-width: 350px; background: #fff; border-radius: 15px; z-index: 101; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-.chat-header { background: #4caf50; color: white; padding: 15px; font-size: 16px; }
-.chat-body { height: 250px; padding: 15px; overflow-y: auto; background: #f9fbf9; }
-.message-bot { background: #e8f5e9; color: #2c3e50; padding: 10px 15px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; font-size: 14px; display: inline-block; max-width: 85%; }
-.chat-input { display: flex; padding: 10px; border-top: 1px solid #eee; }
-.chat-input input { flex: 1; border: 1px solid #e0e0e0; padding: 10px; border-radius: 20px; outline: none; }
-.chat-input button { background: #4caf50; color: white; border: none; padding: 10px 15px; border-radius: 20px; margin-left: 10px; cursor: pointer; }
-#loading { display: none; text-align: center; padding: 20px; color: #7f8c8d; }
+.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-top: 5px; overflow: hidden;}
+.progress-bar { height: 8px; border-radius: 8px; background-color: #4caf50; transition: width 0.5s ease-in-out;}
+.ai-summary { background: #f9fbf9; padding: 12px; border-radius: 8px; font-size: 14px; line-height: 1.6; color: #34495e; margin-top: 15px; border-left: 4px solid #4caf50; }
+.impact-section { background: #2e7d32; color: white; border-radius: 12px; padding: 20px 15px; text-align: center; margin-top: 15px; box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);}
+.impact-number { font-size: 36px; font-weight: bold; margin: 10px 0; color: #e8f5e9;}
+.fab { position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; background: #ffffff; border: 3px solid #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(0,0,0,0.15); cursor: pointer; font-size: 13px; color: #2e7d32; font-weight: bold; z-index: 100; transition: transform 0.2s; flex-direction: column; line-height: 1.2;}
+.fab:active { transform: scale(0.95); }
+.chat-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 99; backdrop-filter: blur(2px);}
+.chat-panel { display: none; position: fixed; bottom: 100px; right: 25px; width: calc(100% - 50px); max-width: 350px; background: #ffffff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 101; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: popUp 0.3s ease-out forwards;}
+@keyframes popUp { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+.chat-header { background: #4caf50; color: white; padding: 15px; font-size: 16px; font-weight: bold; display: flex; justify-content: space-between; align-items: center;}
+.close-btn { cursor: pointer; font-size: 20px; line-height: 1; }
+.chat-body { height: 300px; padding: 15px; overflow-y: auto; background: #f9fbf9; display: flex; flex-direction: column;}
+.message-bot { background: #e8f5e9; color: #2c3e50; padding: 12px 15px; border-radius: 15px 15px 15px 0; margin-bottom: 12px; font-size: 14px; line-height: 1.5; align-self: flex-start; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);}
+.message-user { background: #4caf50; color: white; padding: 12px 15px; border-radius: 15px 15px 0 15px; margin-bottom: 12px; font-size: 14px; line-height: 1.5; align-self: flex-end; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.05);}
+.chat-input { display: flex; padding: 12px; border-top: 1px solid #eeeeee; background: #fff;}
+.chat-input input { flex: 1; border: 1px solid #e0e0e0; padding: 10px 15px; border-radius: 20px; outline: none; font-size: 14px;}
+.chat-input button { background: #4caf50; color: white; border: none; padding: 10px 18px; border-radius: 20px; margin-left: 10px; cursor: pointer; font-weight: bold; transition: background 0.2s;}
+.chat-input button:active { background: #388e3c; }
+.welcome-screen { text-align: center; padding: 40px 20px; color: #7f8c8d; }
+.welcome-screen svg { width: 80px; height: 80px; fill: #a5d6a7; margin-bottom: 15px;}
+#mainDashboard { display: none; animation: fadeIn 0.5s ease-in; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.financial-section { margin-top: 20px; border-top: 2px dashed #e0e0e0; padding-top: 15px; }
+.highlight-value { font-size: 18px; color: #d35400; }
 </style>
 </head>
 <body>
@@ -46,12 +57,16 @@ header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
     </header>
 
     <div class="search-bar">
-        <input type="text" id="searchInput" placeholder="輸入企業代碼或名稱 (例如: 2330)" onkeyup="handleSearch(event)">
+        <input type="text" id="searchInput" placeholder="請輸入企業代碼 (測試: 1232, 1342, 1515)" onkeyup="handleSearch(event)">
     </div>
 
-    <div id="loading">讀取資料中...</div>
+    <div class="welcome-screen" id="welcomeScreen">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        <h3>歡迎使用碳吉平台</h3>
+        <p>請在上方輸入公司代碼，開始您的永續投資導航。<br><br>可測試代碼：<br>1232 (大統益)<br>1236 (宏亞)<br>1342 (八貫)<br>1515 (力山)<br>1535 (中宇)</p>
+    </div>
 
-    <div class="dashboard" id="mainDashboard" style="display: none;">
+    <div class="dashboard" id="mainDashboard">
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title" id="compName">--</h2>
@@ -60,29 +75,31 @@ header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
             
             <div class="data-row">
                 <span class="data-label">環境保護 (E) 構面</span>
-                <span class="data-value" id="envScore">0</span>
+                <span class="data-value" id="envScore" style="color: #2e7d32;">0</span>
             </div>
             <div class="progress-container"><div class="progress-bar" id="envBar" style="width: 0%;"></div></div>
             
             <div class="data-row" style="margin-top: 15px;">
                 <span class="data-label">社會責任 (S) 構面</span>
-                <span class="data-value" id="socScore">0</span>
+                <span class="data-value" id="socScore" style="color: #1976d2;">0</span>
             </div>
             <div class="progress-container"><div class="progress-bar" id="socBar" style="width: 0%; background-color: #2196f3;"></div></div>
 
             <div class="data-row" style="margin-top: 15px;">
                 <span class="data-label">公司治理 (G) 構面</span>
-                <span class="data-value" id="govScore">0</span>
+                <span class="data-value" id="govScore" style="color: #f57c00;">0</span>
             </div>
             <div class="progress-container"><div class="progress-bar" id="govBar" style="width: 0%; background-color: #ff9800;"></div></div>
 
-            <div class="data-row" style="margin-top: 20px; border-top: 1px solid #f0f0f0; padding-top: 10px;">
-                <span class="data-label">綠色營收佔比</span>
-                <span class="data-value" id="greenRev">0%</span>
-            </div>
-            <div class="data-row">
-                <span class="data-label">股東權益報酬率 (ROE)</span>
-                <span class="data-value" id="roeValue">0%</span>
+            <div class="financial-section">
+                <div class="data-row">
+                    <span class="data-label">每百萬營收碳排 (噸)</span>
+                    <span class="data-value highlight-value" id="carbonVal">0</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">股東權益報酬率 (ROE)</span>
+                    <span class="data-value" id="roeValue" style="font-size: 18px;">0%</span>
+                </div>
             </div>
 
             <div class="ai-summary" id="aiSummaryText">
@@ -91,43 +108,41 @@ header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
         </div>
 
         <div class="impact-section">
-            <div>若將資金投入此企業，您的影響力等同於</div>
+            <div style="font-size: 14px; opacity: 0.9;">投資此企業的綠色量化效益</div>
             <div class="impact-number" id="impactTrees">0 棵樹</div>
-            <div>的年碳吸收量！</div>
+            <div style="font-size: 14px; opacity: 0.9;">約當於每百萬資金帶來的年碳吸收潛力</div>
         </div>
     </div>
 
     <div class="chat-overlay" id="chatOverlay" onclick="toggleChat()"></div>
     <div class="chat-panel" id="chatPanel">
-        <div class="chat-header">碳吉寶寶</div>
+        <div class="chat-header">
+            <span>碳吉寶寶小幫手</span>
+            <span class="close-btn" onclick="toggleChat()">&times;</span>
+        </div>
         <div class="chat-body" id="chatBody">
-            <div class="message-bot">你好！我是碳吉寶寶。輸入公司代碼，我會幫你從 TEJ 資料庫提取數據並產生白話文分析喔！</div>
+            <div class="message-bot">你好！我是碳吉寶寶 🌿<br>看不懂上面那些複雜的指標嗎？有什麼問題都可以問我喔！</div>
         </div>
         <div class="chat-input">
-            <input type="text" id="chatInputMsg" placeholder="詢問碳吉寶寶...">
+            <input type="text" id="chatInputMsg" placeholder="例如：ROE 是什麼意思？" onkeypress="handleChatEnter(event)">
             <button onclick="sendChat()">發送</button>
         </div>
     </div>
-    <div class="fab" onclick="toggleChat()">呼叫<br>碳吉</div>
+    
+    <div class="fab" onclick="toggleChat()">
+        <span>呼叫</span>
+        <span>碳吉</span>
+    </div>
 </div>
 
 <script>
-let companyData = [];
-
-window.onload = async () => {
-    try {
-        const response = await fetch('data.json');
-        if(response.ok) {
-            companyData = await response.json();
-            document.getElementById('searchInput').placeholder = "資料載入完成，請輸入代碼 (例: 2330)";
-        }
-    } catch(e) {
-        console.log("Mock data loaded fallback.");
-        companyData = [
-            {"company_id":"2330","company_name":"台灣積體電路","tesg_rating":"A+","env_score":88,"soc_score":85,"gov_score":92,"carbon_emission_tons":1500000,"green_revenue_pct":12.5,"roe_pct":28.5}
-        ];
-    }
-};
+const companyData = [
+  {"company_id":"1232","company_name":"大統益","tesg_rating":"A","env_score":79.58,"soc_score":62.05,"gov_score":61.1,"carbon_emission_tons":4.93,"green_revenue_pct":0.02,"roe_pct":23.06},
+  {"company_id":"1236","company_name":"宏亞","tesg_rating":"B-","env_score":48.85,"soc_score":50.31,"gov_score":52.32,"carbon_emission_tons":4.96,"green_revenue_pct":0.00,"roe_pct":-1.45},
+  {"company_id":"1342","company_name":"八貫","tesg_rating":"B+","env_score":54.93,"soc_score":70.20,"gov_score":56.01,"carbon_emission_tons":3.31,"green_revenue_pct":0.00,"roe_pct":18.47},
+  {"company_id":"1515","company_name":"力山","tesg_rating":"A","env_score":82.36,"soc_score":51.94,"gov_score":72.26,"carbon_emission_tons":0.56,"green_revenue_pct":0.00,"roe_pct":4.37},
+  {"company_id":"1535","company_name":"中宇","tesg_rating":"B+","env_score":70.53,"soc_score":66.63,"gov_score":55.57,"carbon_emission_tons":0.07,"green_revenue_pct":0.00,"roe_pct":13.09}
+];
 
 function handleSearch(e) {
     if(e.key === 'Enter') {
@@ -137,37 +152,42 @@ function handleSearch(e) {
 }
 
 function searchCompany(query) {
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('mainDashboard').style.display = 'none';
+    if(!query) return;
+    const result = companyData.find(c => c.company_id === query || c.company_name.includes(query));
     
-    setTimeout(() => {
-        const result = companyData.find(c => c.company_id === query || c.company_name.includes(query));
-        document.getElementById('loading').style.display = 'none';
-        
-        if(result) {
-            updateUI(result);
-        } else {
-            alert('找不到該企業資料，請嘗試輸入 2330');
-        }
-    }, 600);
+    if(result) {
+        document.getElementById('welcomeScreen').style.display = 'none';
+        updateUI(result);
+    } else {
+        alert('測試資料庫中未找到該代碼。請嘗試輸入: 1232, 1236, 1342, 1515, 1535');
+    }
 }
 
 function updateUI(data) {
-    document.getElementById('mainDashboard').style.display = 'block';
+    const dashboard = document.getElementById('mainDashboard');
+    dashboard.style.display = 'block';
+    
     document.getElementById('compName').innerText = `${data.company_name} (${data.company_id})`;
     document.getElementById('tesgBadge').innerText = `TESG: ${data.tesg_rating}`;
     
     document.getElementById('envScore').innerText = data.env_score;
-    document.getElementById('envBar').style.width = `${data.env_score}%`;
+    setTimeout(() => { document.getElementById('envBar').style.width = `${data.env_score}%`; }, 100);
+    
     document.getElementById('socScore').innerText = data.soc_score;
-    document.getElementById('socBar').style.width = `${data.soc_score}%`;
+    setTimeout(() => { document.getElementById('socBar').style.width = `${data.soc_score}%`; }, 200);
+    
     document.getElementById('govScore').innerText = data.gov_score;
-    document.getElementById('govBar').style.width = `${data.gov_score}%`;
+    setTimeout(() => { document.getElementById('govBar').style.width = `${data.gov_score}%`; }, 300);
     
-    document.getElementById('greenRev').innerText = `${data.green_revenue_pct}%`;
-    document.getElementById('roeValue').innerText = `${data.roe_pct}%`;
+    document.getElementById('carbonVal').innerText = data.carbon_emission_tons;
     
-    const trees = Math.round(data.env_score * 1.5);
+    const roeEl = document.getElementById('roeValue');
+    roeEl.innerText = `${data.roe_pct}%`;
+    roeEl.style.color = data.roe_pct > 0 ? '#2e7d32' : '#c0392b';
+    
+    let baseTrees = 100 - (data.carbon_emission_tons * 5);
+    if(baseTrees < 10) baseTrees = Math.floor(Math.random() * 15) + 5;
+    const trees = Math.round(baseTrees * (data.env_score / 100));
     document.getElementById('impactTrees').innerText = `${trees} 棵樹`;
     
     generateAISummary(data);
@@ -175,8 +195,21 @@ function updateUI(data) {
 
 function generateAISummary(data) {
     const summaryBox = document.getElementById('aiSummaryText');
-    let aiText = `【Hugging Face 模型分析推論】\n該企業在環境保護構面得分 ${data.env_score}，財務指標 ROE 達 ${data.roe_pct}%。模型綜合情緒判定為「正向」。兼具獲利能力與綠色轉型潛力，屬於優質永續投資標的。`;
-    summaryBox.innerText = aiText;
+    let sentiment = data.tesg_rating.includes('A') || data.tesg_rating.includes('B+') ? '正向' : '保守';
+    let roeDesc = data.roe_pct > 10 ? '具備優異的獲利能力' : (data.roe_pct > 0 ? '獲利表現平穩' : '近期獲利面臨挑戰');
+    
+    let aiText = `【碳吉 AI 動態解析】\n根據 TEJ 數據模型推論，該企業綜合評等為 ${data.tesg_rating}。在財務基本面，ROE 達 ${data.roe_pct}%，${roeDesc}。\n綜合環境分數與碳排強度，模型判定其綠色轉型動能為「${sentiment}」，適合納入永續投資觀察名單。`;
+    
+    summaryBox.innerText = '';
+    let i = 0;
+    function typeWriter() {
+        if (i < aiText.length) {
+            summaryBox.innerHTML += aiText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 15);
+        }
+    }
+    typeWriter();
 }
 
 function toggleChat() {
@@ -188,7 +221,14 @@ function toggleChat() {
     } else {
         panel.style.display = 'flex';
         overlay.style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('chatInputMsg').focus();
+        }, 100);
     }
+}
+
+function handleChatEnter(e) {
+    if(e.key === 'Enter') sendChat();
 }
 
 function sendChat() {
@@ -197,13 +237,26 @@ function sendChat() {
     if(!msg) return;
     
     const body = document.getElementById('chatBody');
-    body.innerHTML += `<div style="text-align: right; margin-bottom: 10px;"><div style="background: #4caf50; color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; display: inline-block; max-width: 85%; font-size: 14px;">${msg}</div></div>`;
+    body.innerHTML += `<div class="message-user">${msg}</div>`;
     input.value = '';
+    body.scrollTop = body.scrollHeight;
     
+    const loadingId = 'loading-' + Date.now();
     setTimeout(() => {
-        body.innerHTML += `<div class="message-bot">碳吉寶寶分析中...這部分未來將透過 API 串接開源大型語言模型，給予即時回覆。</div>`;
+        body.innerHTML += `<div class="message-bot" id="${loadingId}">碳吉寶寶思考中...</div>`;
         body.scrollTop = body.scrollHeight;
-    }, 800);
+        
+        setTimeout(() => {
+            document.getElementById(loadingId).remove();
+            let reply = "這是一個很好的問題！在實際部署時，我會串接 Hugging Face 的開源模型來為您解答這類永續金融的專業知識喔！";
+            if(msg.toLowerCase().includes('roe')) reply = "ROE 就是「股東權益報酬率」，簡單來說，就是公司拿股東的錢去投資，能賺回多少比例的淨利。數字越高通常代表幫股東賺錢的效率越好！";
+            if(msg.toLowerCase().includes('tesg')) reply = "TESG 是台灣經濟新報(TEJ)專為台灣企業設計的永續發展指標，結合了環境(E)、社會(S)、公司治理(G)三個構面，A+是最高等級喔！";
+            
+            body.innerHTML += `<div class="message-bot">${reply}</div>`;
+            body.scrollTop = body.scrollHeight;
+        }, 1500);
+        
+    }, 500);
 }
 </script>
 
