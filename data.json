@@ -1,0 +1,35 @@
+[
+  {
+    "company_id": "2330",
+    "company_name": "台灣積體電路",
+    "tesg_rating": "A+",
+    "env_score": 88,
+    "soc_score": 85,
+    "gov_score": 92,
+    "carbon_emission_tons": 1500000,
+    "green_revenue_pct": 12.5,
+    "roe_pct": 28.5
+  },
+  {
+    "company_id": "2881",
+    "company_name": "富邦金控",
+    "tesg_rating": "A",
+    "env_score": 82,
+    "soc_score": 88,
+    "gov_score": 90,
+    "carbon_emission_tons": 45000,
+    "green_revenue_pct": 8.2,
+    "roe_pct": 15.2
+  },
+  {
+    "company_id": "1101",
+    "company_name": "台灣水泥",
+    "tesg_rating": "B+",
+    "env_score": 75,
+    "soc_score": 80,
+    "gov_score": 85,
+    "carbon_emission_tons": 8500000,
+    "green_revenue_pct": 25.0,
+    "roe_pct": 8.5
+  }
+]
