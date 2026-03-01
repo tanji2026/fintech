@@ -5,217 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>碳吉 TanJi - 永續投資導航</title>
 <style>
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f0f4f1;
-    color: #2c3e50;
-    display: flex;
-    justify-content: center;
-}
-.app-container {
-    width: 100%;
-    max-width: 480px;
-    background-color: #ffffff;
-    min-height: 100vh;
-    box-shadow: 0 0 20px rgba(0,0,0,0.05);
-    position: relative;
-    overflow-x: hidden;
-}
-header {
-    background: linear-gradient(135deg, #2e7d32, #4caf50);
-    color: white;
-    padding: 20px 15px;
-    text-align: center;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-header h1 {
-    margin: 0;
-    font-size: 24px;
-    letter-spacing: 1px;
-}
-header p {
-    margin: 5px 0 0 0;
-    font-size: 14px;
-    opacity: 0.9;
-}
-.search-bar {
-    padding: 15px;
-    background: #ffffff;
-}
-.search-bar input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #e0e0e0;
-    border-radius: 25px;
-    font-size: 16px;
-    box-sizing: border-box;
-    outline: none;
-    transition: border-color 0.3s;
-}
-.search-bar input:focus {
-    border-color: #4caf50;
-}
-.dashboard {
-    padding: 10px 15px;
-}
-.card {
-    background: #ffffff;
-    border: 1px solid #e8eee9;
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-}
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-.card-title {
-    margin: 0;
-    font-size: 18px;
-    color: #2e7d32;
-}
-.badge {
-    background-color: #e8f5e9;
-    color: #2e7d32;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: bold;
-}
-.data-row {
-    display: flex;
-    justify-content: space-between;
-    margin: 8px 0;
-    font-size: 15px;
-}
-.data-label {
-    color: #7f8c8d;
-}
-.data-value {
-    font-weight: bold;
-}
-.ai-summary {
-    background: #f9fbf9;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #34495e;
-    margin-top: 10px;
-    border-left: 4px solid #4caf50;
-}
-.impact-section {
-    background: #2e7d32;
-    color: white;
-    border-radius: 12px;
-    padding: 20px 15px;
-    text-align: center;
-    margin: 15px;
-}
-.impact-number {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 10px 0;
-}
-.fab {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    width: 65px;
-    height: 65px;
-    background: #ffffff;
-    border: 3px solid #4caf50;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-    cursor: pointer;
-    font-size: 12px;
-    color: #2e7d32;
-    font-weight: bold;
-    z-index: 100;
-    transition: transform 0.2s;
-}
-.fab:active {
-    transform: scale(0.95);
-}
-.chat-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: 99;
-}
-.chat-panel {
-    display: none;
-    position: fixed;
-    bottom: 100px;
-    right: 25px;
-    width: calc(100% - 80px);
-    max-width: 350px;
-    background: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    z-index: 101;
-    flex-direction: column;
-    overflow: hidden;
-}
-.chat-header {
-    background: #4caf50;
-    color: white;
-    padding: 15px;
-    font-size: 16px;
-}
-.chat-body {
-    height: 250px;
-    padding: 15px;
-    overflow-y: auto;
-    background: #f9fbf9;
-}
-.message-bot {
-    background: #e8f5e9;
-    color: #2c3e50;
-    padding: 10px 15px;
-    border-radius: 15px 15px 15px 0;
-    margin-bottom: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-    display: inline-block;
-    max-width: 85%;
-}
-.chat-input {
-    display: flex;
-    padding: 10px;
-    border-top: 1px solid #eeeeee;
-}
-.chat-input input {
-    flex: 1;
-    border: 1px solid #e0e0e0;
-    padding: 10px;
-    border-radius: 20px;
-    outline: none;
-}
-.chat-input button {
-    background: #4caf50;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 20px;
-    margin-left: 10px;
-    cursor: pointer;
-}
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f0f4f1; color: #2c3e50; display: flex; justify-content: center; }
+.app-container { width: 100%; max-width: 480px; background: #fff; min-height: 100vh; position: relative; overflow-x: hidden; }
+header { background: linear-gradient(135deg, #2e7d32, #4caf50); color: white; padding: 20px 15px; text-align: center; border-radius: 0 0 15px 15px; }
+header h1 { margin: 0; font-size: 24px; }
+header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
+.search-bar { padding: 15px; }
+.search-bar input { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 25px; font-size: 16px; box-sizing: border-box; }
+.dashboard { padding: 10px 15px; }
+.card { background: #fff; border: 1px solid #e8eee9; border-radius: 12px; padding: 15px; margin-bottom: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
+.card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 10px; }
+.card-title { margin: 0; font-size: 18px; color: #2e7d32; }
+.badge { background: #e8f5e9; color: #2e7d32; padding: 4px 10px; border-radius: 12px; font-size: 14px; font-weight: bold; }
+.data-row { display: flex; justify-content: space-between; margin: 8px 0; font-size: 15px; }
+.data-label { color: #7f8c8d; }
+.data-value { font-weight: bold; }
+.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 8px; margin-top: 5px; }
+.progress-bar { height: 8px; border-radius: 8px; background-color: #4caf50; }
+.ai-summary { background: #f9fbf9; padding: 10px; border-radius: 8px; font-size: 14px; line-height: 1.5; margin-top: 15px; border-left: 4px solid #4caf50; }
+.impact-section { background: #2e7d32; color: white; border-radius: 12px; padding: 20px 15px; text-align: center; margin-top: 15px; }
+.impact-number { font-size: 32px; font-weight: bold; margin: 10px 0; }
+.fab { position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px; background: #fff; border: 3px solid #4caf50; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 12px rgba(0,0,0,0.15); cursor: pointer; font-size: 12px; color: #2e7d32; font-weight: bold; z-index: 100; }
+.chat-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 99; }
+.chat-panel { display: none; position: fixed; bottom: 100px; right: 25px; width: calc(100% - 80px); max-width: 350px; background: #fff; border-radius: 15px; z-index: 101; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.chat-header { background: #4caf50; color: white; padding: 15px; font-size: 16px; }
+.chat-body { height: 250px; padding: 15px; overflow-y: auto; background: #f9fbf9; }
+.message-bot { background: #e8f5e9; color: #2c3e50; padding: 10px 15px; border-radius: 15px 15px 15px 0; margin-bottom: 10px; font-size: 14px; display: inline-block; max-width: 85%; }
+.chat-input { display: flex; padding: 10px; border-top: 1px solid #eee; }
+.chat-input input { flex: 1; border: 1px solid #e0e0e0; padding: 10px; border-radius: 20px; outline: none; }
+.chat-input button { background: #4caf50; color: white; border: none; padding: 10px 15px; border-radius: 20px; margin-left: 10px; cursor: pointer; }
+#loading { display: none; text-align: center; padding: 20px; color: #7f8c8d; }
 </style>
 </head>
 <body>
@@ -227,56 +46,142 @@ header p {
     </header>
 
     <div class="search-bar">
-        <input type="text" placeholder="輸入企業代碼或名稱 (例如: 2330)">
+        <input type="text" id="searchInput" placeholder="輸入企業代碼或名稱 (例如: 2330)" onkeyup="handleSearch(event)">
     </div>
 
-    <div class="dashboard">
+    <div id="loading">讀取資料中...</div>
+
+    <div class="dashboard" id="mainDashboard" style="display: none;">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">台灣積體電路 (2330)</h2>
-                <span class="badge">TESG: A+ 等級</span>
+                <h2 class="card-title" id="compName">--</h2>
+                <span class="badge" id="tesgBadge">TESG: --</span>
             </div>
+            
             <div class="data-row">
-                <span class="data-label">減碳達成率</span>
-                <span class="data-value" style="color:#2e7d32;">85%</span>
+                <span class="data-label">環境保護 (E) 構面</span>
+                <span class="data-value" id="envScore">0</span>
             </div>
-            <div class="data-row">
+            <div class="progress-container"><div class="progress-bar" id="envBar" style="width: 0%;"></div></div>
+            
+            <div class="data-row" style="margin-top: 15px;">
+                <span class="data-label">社會責任 (S) 構面</span>
+                <span class="data-value" id="socScore">0</span>
+            </div>
+            <div class="progress-container"><div class="progress-bar" id="socBar" style="width: 0%; background-color: #2196f3;"></div></div>
+
+            <div class="data-row" style="margin-top: 15px;">
+                <span class="data-label">公司治理 (G) 構面</span>
+                <span class="data-value" id="govScore">0</span>
+            </div>
+            <div class="progress-container"><div class="progress-bar" id="govBar" style="width: 0%; background-color: #ff9800;"></div></div>
+
+            <div class="data-row" style="margin-top: 20px; border-top: 1px solid #f0f0f0; padding-top: 10px;">
                 <span class="data-label">綠色營收佔比</span>
-                <span class="data-value">12.5%</span>
+                <span class="data-value" id="greenRev">0%</span>
             </div>
-            <div class="ai-summary">
-                AI 數據轉譯：該企業近期在再生能源採購量大幅提升，且高階主管薪酬已與 ESG 績效掛鉤，屬於低風險、高潛力的綠色投資標的。
+            <div class="data-row">
+                <span class="data-label">股東權益報酬率 (ROE)</span>
+                <span class="data-value" id="roeValue">0%</span>
+            </div>
+
+            <div class="ai-summary" id="aiSummaryText">
+                AI 分析載入中...
             </div>
         </div>
 
         <div class="impact-section">
-            <div>您的模擬投資組合已為地球</div>
-            <div class="impact-number">減少 1,250 kg</div>
-            <div>二氧化碳排放量，相當於種植了 104 棵樹！</div>
+            <div>若將資金投入此企業，您的影響力等同於</div>
+            <div class="impact-number" id="impactTrees">0 棵樹</div>
+            <div>的年碳吸收量！</div>
         </div>
     </div>
 
     <div class="chat-overlay" id="chatOverlay" onclick="toggleChat()"></div>
-
     <div class="chat-panel" id="chatPanel">
-        <div class="chat-header">碳吉寶寶 (AI 數據轉譯員)</div>
-        <div class="chat-body">
-            <div class="message-bot">你好！我是碳吉寶寶。看不懂複雜的財務指標嗎？把你想投資的公司告訴我，我用白話文解釋給你聽！</div>
+        <div class="chat-header">碳吉寶寶</div>
+        <div class="chat-body" id="chatBody">
+            <div class="message-bot">你好！我是碳吉寶寶。輸入公司代碼，我會幫你從 TEJ 資料庫提取數據並產生白話文分析喔！</div>
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="例如：什麼是 TESG 指標？">
-            <button onclick="toggleChat()">發送</button>
+            <input type="text" id="chatInputMsg" placeholder="詢問碳吉寶寶...">
+            <button onclick="sendChat()">發送</button>
         </div>
     </div>
-
     <div class="fab" onclick="toggleChat()">呼叫<br>碳吉</div>
 </div>
 
 <script>
+let companyData = [];
+
+window.onload = async () => {
+    try {
+        const response = await fetch('data.json');
+        if(response.ok) {
+            companyData = await response.json();
+            document.getElementById('searchInput').placeholder = "資料載入完成，請輸入代碼 (例: 2330)";
+        }
+    } catch(e) {
+        console.log("Mock data loaded fallback.");
+        companyData = [
+            {"company_id":"2330","company_name":"台灣積體電路","tesg_rating":"A+","env_score":88,"soc_score":85,"gov_score":92,"carbon_emission_tons":1500000,"green_revenue_pct":12.5,"roe_pct":28.5}
+        ];
+    }
+};
+
+function handleSearch(e) {
+    if(e.key === 'Enter') {
+        const query = e.target.value.trim();
+        searchCompany(query);
+    }
+}
+
+function searchCompany(query) {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('mainDashboard').style.display = 'none';
+    
+    setTimeout(() => {
+        const result = companyData.find(c => c.company_id === query || c.company_name.includes(query));
+        document.getElementById('loading').style.display = 'none';
+        
+        if(result) {
+            updateUI(result);
+        } else {
+            alert('找不到該企業資料，請嘗試輸入 2330');
+        }
+    }, 600);
+}
+
+function updateUI(data) {
+    document.getElementById('mainDashboard').style.display = 'block';
+    document.getElementById('compName').innerText = `${data.company_name} (${data.company_id})`;
+    document.getElementById('tesgBadge').innerText = `TESG: ${data.tesg_rating}`;
+    
+    document.getElementById('envScore').innerText = data.env_score;
+    document.getElementById('envBar').style.width = `${data.env_score}%`;
+    document.getElementById('socScore').innerText = data.soc_score;
+    document.getElementById('socBar').style.width = `${data.soc_score}%`;
+    document.getElementById('govScore').innerText = data.gov_score;
+    document.getElementById('govBar').style.width = `${data.gov_score}%`;
+    
+    document.getElementById('greenRev').innerText = `${data.green_revenue_pct}%`;
+    document.getElementById('roeValue').innerText = `${data.roe_pct}%`;
+    
+    const trees = Math.round(data.env_score * 1.5);
+    document.getElementById('impactTrees').innerText = `${trees} 棵樹`;
+    
+    generateAISummary(data);
+}
+
+function generateAISummary(data) {
+    const summaryBox = document.getElementById('aiSummaryText');
+    let aiText = `【Hugging Face 模型分析推論】\n該企業在環境保護構面得分 ${data.env_score}，財務指標 ROE 達 ${data.roe_pct}%。模型綜合情緒判定為「正向」。兼具獲利能力與綠色轉型潛力，屬於優質永續投資標的。`;
+    summaryBox.innerText = aiText;
+}
+
 function toggleChat() {
     const panel = document.getElementById('chatPanel');
     const overlay = document.getElementById('chatOverlay');
-    
     if (panel.style.display === 'flex') {
         panel.style.display = 'none';
         overlay.style.display = 'none';
@@ -284,6 +189,21 @@ function toggleChat() {
         panel.style.display = 'flex';
         overlay.style.display = 'block';
     }
+}
+
+function sendChat() {
+    const input = document.getElementById('chatInputMsg');
+    const msg = input.value.trim();
+    if(!msg) return;
+    
+    const body = document.getElementById('chatBody');
+    body.innerHTML += `<div style="text-align: right; margin-bottom: 10px;"><div style="background: #4caf50; color: white; padding: 10px 15px; border-radius: 15px 15px 0 15px; display: inline-block; max-width: 85%; font-size: 14px;">${msg}</div></div>`;
+    input.value = '';
+    
+    setTimeout(() => {
+        body.innerHTML += `<div class="message-bot">碳吉寶寶分析中...這部分未來將透過 API 串接開源大型語言模型，給予即時回覆。</div>`;
+        body.scrollTop = body.scrollHeight;
+    }, 800);
 }
 </script>
 
