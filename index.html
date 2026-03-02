@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>碳吉 TanJi - 永續投資導航</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
 :root { --primary-green: #2e7d32; --light-green: #4caf50; --bg-color: #f4f7f6; --card-bg: #ffffff; --text-main: #2c3e50; --text-muted: #7f8c8d; }
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
@@ -19,21 +20,17 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .grid-layout { display: grid; grid-template-columns: 1fr; gap: 20px; }
 .card { background: var(--card-bg); border-radius: 16px; padding: 25px; box-shadow: 0 8px 20px rgba(0,0,0,0.04); }
-.card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f4f1; padding-bottom: 15px; margin-bottom: 20px; }
+.card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f0f4f1; padding-bottom: 15px; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;}
 .card-title { margin: 0; font-size: 22px; color: var(--primary-green); font-weight: bold; }
-.badge { background-color: #e8f5e9; color: var(--primary-green); padding: 6px 15px; border-radius: 20px; font-size: 16px; font-weight: bold; box-shadow: 0 2px 5px rgba(46,125,50,0.1); }
-.data-group { margin-bottom: 20px; }
-.data-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 16px; }
-.data-label { color: var(--text-muted); font-weight: 500; }
-.data-value { font-weight: bold; font-size: 18px; }
-.progress-container { width: 100%; background-color: #e9ecef; border-radius: 10px; height: 10px; overflow: hidden; }
-.progress-bar { height: 100%; border-radius: 10px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.badge-group { display: flex; gap: 10px; }
+.badge { background-color: #e8f5e9; color: var(--primary-green); padding: 6px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; box-shadow: 0 2px 5px rgba(46,125,50,0.1); }
+.badge-rank { background-color: #e3f2fd; color: #1565c0; padding: 6px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; box-shadow: 0 2px 5px rgba(21,101,192,0.1); }
+.chart-container { position: relative; width: 100%; max-width: 350px; margin: 0 auto; aspect-ratio: 1; }
 .financial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: #f8fcf9; padding: 25px; border-radius: 12px; border: 1px solid #e2eee4; }
 .fin-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .fin-label { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
 .fin-value { font-size: 24px; font-weight: bold; color: var(--primary-green); }
-.ai-box { background: linear-gradient(to right bottom, #ffffff, #f1f8f3); border: 1px solid #c8e6c9; border-radius: 16px; padding: 20px; position: relative; overflow: hidden; }
-.ai-box::before { content: 'AI 洞察'; position: absolute; top: -10px; right: -20px; background: var(--light-green); color: white; padding: 15px 30px 5px 20px; transform: rotate(45deg); font-size: 12px; font-weight: bold; }
+.ai-box { background: linear-gradient(to right bottom, #ffffff, #f1f8f3); border: 1px solid #c8e6c9; border-radius: 16px; padding: 20px; }
 .ai-content { font-size: 15px; line-height: 1.8; color: #34495e; min-height: 80px; }
 .impact-card { background: linear-gradient(135deg, #1b5e20, #388e3c); color: white; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(27, 94, 32, 0.3); display: flex; flex-direction: column; justify-content: center; }
 .impact-number { font-size: 54px; font-weight: bold; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
@@ -41,9 +38,6 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 .welcome-screen h2 { margin-top: 0; color: var(--primary-green); font-size: 26px; line-height: 1.4; }
 .tanji-img-welcome { width: 140px; height: 140px; object-fit: contain; margin-bottom: 25px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1)); }
 .system-intro { background: white; padding: 20px 25px; border-radius: 12px; border-left: 5px solid var(--primary-green); font-size: 15px; line-height: 1.6; text-align: left; margin: 20px 0; color: #34495e; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-.test-codes { display: flex; justify-content: center; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
-.code-chip { background: white; border: 1px solid #c8e6c9; padding: 8px 16px; border-radius: 20px; cursor: pointer; color: var(--primary-green); font-weight: bold; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.code-chip:hover { background: var(--light-green); color: white; transform: translateY(-2px); }
 .fab { position: fixed; bottom: 30px; right: 30px; width: 68px; height: 68px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 25px rgba(0,0,0,0.15); cursor: pointer; z-index: 100; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .fab:hover { transform: scale(1.08); box-shadow: 0 15px 35px rgba(0,0,0,0.2); }
 .tanji-img-fab { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
@@ -51,7 +45,6 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 .chat-panel { display: none; position: fixed; bottom: 115px; right: 30px; width: 380px; max-width: calc(100vw - 40px); background: var(--card-bg); border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); z-index: 101; flex-direction: column; overflow: hidden; transform-origin: bottom right; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
 @keyframes popUp { from { opacity: 0; transform: scale(0.5) translate(50px, 50px); } to { opacity: 1; transform: scale(1) translate(0, 0); } }
 .chat-header { background: var(--primary-green); color: white; padding: 15px 20px; font-size: 18px; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
-.chat-header-title { display: flex; align-items: center; }
 .close-btn { cursor: pointer; font-size: 24px; line-height: 1; opacity: 0.8; transition: opacity 0.2s; }
 .close-btn:hover { opacity: 1; }
 .chat-body { height: 350px; padding: 20px; overflow-y: auto; background: #fcfcfc; display: flex; flex-direction: column; gap: 15px; }
@@ -93,26 +86,18 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 
     <div class="search-container">
         <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="請輸入企業代碼 (按 Enter 搜尋)" onkeypress="handleSearch(event)">
+            <input type="text" id="searchInput" list="companyList" placeholder="請輸入企業代碼或名稱 (按 Enter 搜尋)" onkeypress="handleSearch(event)">
+            <datalist id="companyList"></datalist>
         </div>
     </div>
 
     <div class="welcome-screen" id="welcomeScreen">
-        <img src="./assets/tanji-welcome.png" alt="[碳吉寶寶歡迎圖片]" class="tanji-img-welcome">
-        <h2>歡迎進入 TanJi<br>永續金融量化分析系統</h2>
+        <img src="./assets/tanji-welcome.png" alt="[碳吉寶寶歡迎圖片]" class="tanji-img-welcome" onerror="this.style.display='none'">
+        <h2>歡迎進入碳吉 TanJi<br>永續投資導航</h2>
         
         <div class="system-intro">
             <strong>📊 系統資料來源與模型說明：</strong><br><br>
             本系統底層分析引擎串接「台灣經濟新報 (TEJ) 資料庫」。利用其專為台灣市場設計的 <b>TESG 永續發展指標</b>，結合企業真實財務報表數據，透過量化模型協助一般投資人輕鬆識別具備「綠色轉型潛力」與「財務穩健度」的雙優勢企業。
-        </div>
-
-        <p>請點擊下方代碼或於上方輸入框測試：</p>
-        <div class="test-codes">
-            <div class="code-chip" onclick="searchCompany('1232')">1232 大統益</div>
-            <div class="code-chip" onclick="searchCompany('1236')">1236 宏亞</div>
-            <div class="code-chip" onclick="searchCompany('1342')">1342 八貫</div>
-            <div class="code-chip" onclick="searchCompany('1515')">1515 力山</div>
-            <div class="code-chip" onclick="searchCompany('1535')">1535 中宇</div>
         </div>
     </div>
 
@@ -122,31 +107,14 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
             <div class="card esg-col">
                 <div class="card-header">
                     <h2 class="card-title" id="compName">--</h2>
-                    <span class="badge" id="tesgBadge">TESG: --</span>
+                    <div class="badge-group">
+                        <span class="badge" id="tesgBadge">TESG: --</span>
+                        <span class="badge-rank" id="sasbRank">產業排名: --</span>
+                    </div>
                 </div>
                 
-                <div class="data-group">
-                    <div class="data-row">
-                        <span class="data-label">環境保護 (E) 構面</span>
-                        <span class="data-value" id="envScore" style="color: #2e7d32;">0</span>
-                    </div>
-                    <div class="progress-container"><div class="progress-bar" id="envBar" style="width: 0%; background-color: #4caf50;"></div></div>
-                </div>
-                
-                <div class="data-group">
-                    <div class="data-row">
-                        <span class="data-label">社會責任 (S) 構面</span>
-                        <span class="data-value" id="socScore" style="color: #1976d2;">0</span>
-                    </div>
-                    <div class="progress-container"><div class="progress-bar" id="socBar" style="width: 0%; background-color: #2196f3;"></div></div>
-                </div>
-
-                <div class="data-group">
-                    <div class="data-row">
-                        <span class="data-label">公司治理 (G) 構面</span>
-                        <span class="data-value" id="govScore" style="color: #f57c00;">0</span>
-                    </div>
-                    <div class="progress-container"><div class="progress-bar" id="govBar" style="width: 0%; background-color: #ff9800;"></div></div>
+                <div class="chart-container">
+                    <canvas id="esgRadarChart"></canvas>
                 </div>
             </div>
 
@@ -188,9 +156,7 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
     <div class="chat-overlay" id="chatOverlay" onclick="toggleChat()"></div>
     <div class="chat-panel" id="chatPanel">
         <div class="chat-header">
-            <div class="chat-header-title">
-                <span>碳吉寶寶小幫手</span>
-            </div>
+            <span>碳吉寶寶小幫手</span>
             <span class="close-btn" onclick="toggleChat()">&times;</span>
         </div>
         <div class="chat-body" id="chatBody">
@@ -203,7 +169,7 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
     </div>
     
     <div class="fab" onclick="toggleChat()">
-        <img src="./assets/tanji-fab.png" alt="[呼叫碳吉]" class="tanji-img-fab">
+        <img src="./assets/tanji-fab.png" alt="[呼叫碳吉]" class="tanji-img-fab" onerror="this.style.display='none'">
     </div>
 
     <footer class="disclaimer">
@@ -212,28 +178,50 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 </div>
 
 <script>
-const companyData = [
-  {"company_id":"1232","company_name":"大統益","tesg_rating":"A","env_score":79.58,"soc_score":62.05,"gov_score":61.1,"carbon_emission_tons":4.93,"roe_pct":23.06,"eps":6.52,"green_power":0.01},
-  {"company_id":"1236","company_name":"宏亞","tesg_rating":"B-","env_score":48.85,"soc_score":50.31,"gov_score":52.32,"carbon_emission_tons":4.96,"roe_pct":-1.45,"eps":-0.24,"green_power":0},
-  {"company_id":"1342","company_name":"八貫","tesg_rating":"B+","env_score":54.93,"soc_score":70.20,"gov_score":56.01,"carbon_emission_tons":3.31,"roe_pct":18.47,"eps":5.21,"green_power":0.05},
-  {"company_id":"1515","company_name":"力山","tesg_rating":"A","env_score":82.36,"soc_score":51.94,"gov_score":72.26,"carbon_emission_tons":0.56,"roe_pct":4.37,"eps":1.15,"green_power":0.12},
-  {"company_id":"1535","company_name":"中宇","tesg_rating":"B+","env_score":70.53,"soc_score":66.63,"gov_score":55.57,"carbon_emission_tons":0.07,"roe_pct":13.09,"eps":3.84,"green_power":0.02}
-];
+let companyData = [];
+let radarChartInstance = null;
+
+window.onload = async () => {
+    try {
+        const response = await fetch('data.json');
+        if(response.ok) {
+            companyData = await response.json();
+            populateDatalist();
+        } else {
+            document.getElementById('welcomeScreen').innerHTML += '<p style="color:red;">讀取 data.json 失敗，請確認檔案位置與伺服器設定。</p>';
+        }
+    } catch(e) {
+        document.getElementById('welcomeScreen').innerHTML += '<p style="color:red;">請透過伺服器環境 (如 Live Server) 開啟，以正確讀取 JSON 資料。</p>';
+    }
+};
+
+function populateDatalist() {
+    const dataList = document.getElementById('companyList');
+    dataList.innerHTML = '';
+    companyData.forEach(company => {
+        const option = document.createElement('option');
+        option.value = `${company.company_id} ${company.company_name}`;
+        dataList.appendChild(option);
+    });
+}
 
 function handleSearch(e) {
-    if(e.key === 'Enter') searchCompany(e.target.value.trim());
+    if(e.key === 'Enter') {
+        let query = e.target.value.trim();
+        query = query.split(' ')[0]; 
+        searchCompany(query);
+    }
 }
 
 function searchCompany(query) {
     if(!query) return;
-    document.getElementById('searchInput').value = query;
     const result = companyData.find(c => c.company_id === query || c.company_name.includes(query));
     
     if(result) {
         document.getElementById('welcomeScreen').style.display = 'none';
         updateUI(result);
     } else {
-        alert('測試資料庫中未找到該代碼。請嘗試輸入: 1232, 1342 等');
+        alert('測試資料庫中未找到該代碼。');
     }
 }
 
@@ -243,19 +231,9 @@ function updateUI(data) {
     
     document.getElementById('compName').innerText = `${data.company_name} (${data.company_id})`;
     document.getElementById('tesgBadge').innerText = `TESG 評等: ${data.tesg_rating}`;
+    document.getElementById('sasbRank').innerText = `${data.industry}排名: ${data.sasb_rank}`;
     
-    document.querySelectorAll('.progress-bar').forEach(bar => bar.style.width = '0%');
-    
-    setTimeout(() => {
-        document.getElementById('envScore').innerText = data.env_score;
-        document.getElementById('envBar').style.width = `${data.env_score}%`;
-        
-        document.getElementById('socScore').innerText = data.soc_score;
-        document.getElementById('socBar').style.width = `${data.soc_score}%`;
-        
-        document.getElementById('govScore').innerText = data.gov_score;
-        document.getElementById('govBar').style.width = `${data.gov_score}%`;
-    }, 100);
+    updateRadarChart(data.env_score, data.soc_score, data.gov_score);
     
     document.getElementById('carbonVal').innerText = data.carbon_emission_tons;
     
@@ -275,6 +253,47 @@ function updateUI(data) {
     animateValue("impactTrees", 0, targetTrees, 1500);
     
     generateAISummary(data);
+}
+
+function updateRadarChart(e_score, s_score, g_score) {
+    const ctx = document.getElementById('esgRadarChart').getContext('2d');
+    
+    if (radarChartInstance) {
+        radarChartInstance.destroy();
+    }
+    
+    radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['環境保護 (E)', '社會責任 (S)', '公司治理 (G)'],
+            datasets: [{
+                label: 'ESG 構面分數',
+                data: [e_score, s_score, g_score],
+                backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                borderColor: '#2e7d32',
+                pointBackgroundColor: '#2e7d32',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#2e7d32',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
+                    pointLabels: { font: { size: 14, weight: 'bold' }, color: '#2c3e50' },
+                    ticks: { min: 0, max: 100, stepSize: 20, backdropColor: 'transparent' }
+                }
+            },
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
 }
 
 function animateValue(id, start, end, duration) {
@@ -298,8 +317,6 @@ function generateAISummary(data) {
     
     let aiText = `根據系統推論，該企業綜合評等為 ${data.tesg_rating}。財務面 EPS 達 ${data.eps} 元，${finDesc}。結合環境分數分析，其綠色轉型動能判定為「<strong style="color:var(--primary-green)">${sentiment}</strong>」，建議納入永續投資觀察名單。`;
     
-    summaryBox.innerHTML = '';
-    const cleanText = aiText.replace(/(<([^>]+)>)/gi, ""); 
     summaryBox.innerHTML = aiText;
 }
 
