@@ -9,13 +9,14 @@
 :root { --primary-green: #2e7d32; --light-green: #4caf50; --bg-color: #f4f7f6; --card-bg: #ffffff; --text-main: #2c3e50; --text-muted: #7f8c8d; }
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
 .app-container { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; flex-grow: 1; position: relative; }
-header { background: linear-gradient(135deg, var(--primary-green), var(--light-green)); color: white; padding: 25px 20px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-header h1 { margin: 0; font-size: 28px; letter-spacing: 2px; }
-header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
-.search-container { padding: 20px; background: var(--bg-color); display: flex; justify-content: center; }
-.search-wrapper { position: relative; width: 100%; max-width: 600px; }
-.search-wrapper input { width: 100%; padding: 15px 20px; border: none; border-radius: 30px; font-size: 16px; box-sizing: border-box; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: box-shadow 0.3s, transform 0.2s; }
-.search-wrapper input:focus { box-shadow: 0 6px 20px rgba(76, 175, 80, 0.2); transform: translateY(-2px); }
+header { background: linear-gradient(-45deg, #1b5e20, #2e7d32, #4caf50, #2e7d32); background-size: 400% 400%; animation: gradientBG 12s ease infinite; color: white; padding: 30px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.15); border-bottom: 1px solid rgba(255,255,255,0.1); }
+@keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+header h1 { margin: 0; font-size: 32px; letter-spacing: 2px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+header p { margin: 10px 0 0 0; font-size: 16px; opacity: 0.95; letter-spacing: 1px; }
+.search-container { padding: 25px 20px; background: var(--bg-color); display: flex; justify-content: center; }
+.search-wrapper { position: relative; width: 100%; max-width: 650px; }
+.search-wrapper input { width: 100%; padding: 16px 25px; border: none; border-radius: 30px; font-size: 16px; box-sizing: border-box; outline: none; box-shadow: 0 6px 20px rgba(0,0,0,0.06); transition: box-shadow 0.3s, transform 0.2s; }
+.search-wrapper input:focus { box-shadow: 0 8px 25px rgba(76, 175, 80, 0.25); transform: translateY(-2px); }
 .dashboard { display: none; padding: 20px; gap: 20px; animation: fadeIn 0.6s ease-out; margin-bottom: 40px; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 .grid-layout { display: grid; grid-template-columns: 1fr; gap: 20px; }
@@ -32,8 +33,8 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 .fin-value { font-size: 24px; font-weight: bold; color: var(--primary-green); }
 .ai-box { background: linear-gradient(to right bottom, #ffffff, #f1f8f3); border: 1px solid #c8e6c9; border-radius: 16px; padding: 20px; }
 .ai-content { font-size: 15px; line-height: 1.8; color: #34495e; min-height: 80px; }
-.impact-card { background: linear-gradient(135deg, #1b5e20, #388e3c); color: white; border-radius: 16px; padding: 30px; text-align: center; box-shadow: 0 10px 25px rgba(27, 94, 32, 0.3); display: flex; flex-direction: column; justify-content: center; }
-.impact-number { font-size: 54px; font-weight: bold; margin: 15px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+.impact-card { background: linear-gradient(135deg, #1b5e20, #388e3c); color: white; border-radius: 16px; padding: 35px 20px; text-align: center; box-shadow: 0 10px 25px rgba(27, 94, 32, 0.3); display: flex; flex-direction: column; justify-content: center; }
+.impact-number { font-size: 54px; font-weight: bold; margin: 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
 .welcome-screen { text-align: center; padding: 40px 20px; color: var(--text-muted); flex-grow: 1; display: flex; flex-direction: column; align-items: center; max-width: 700px; margin: 0 auto; }
 .welcome-screen h2 { margin-top: 0; color: var(--primary-green); font-size: 26px; line-height: 1.4; }
 .tanji-img-welcome { width: 140px; height: 140px; object-fit: contain; margin-bottom: 25px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.1)); }
@@ -86,13 +87,13 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
 
     <div class="search-container">
         <div class="search-wrapper">
-            <input type="text" id="searchInput" list="companyList" placeholder="請輸入企業代碼或名稱 (按 Enter 搜尋)" onkeypress="handleSearch(event)">
+            <input type="text" id="searchInput" list="companyList" placeholder="請輸入企業代碼或名稱 (按 Enter 搜尋)" onkeypress="handleSearch(event)" onclick="this.value=''">
             <datalist id="companyList"></datalist>
         </div>
     </div>
 
     <div class="welcome-screen" id="welcomeScreen">
-        <img src="./assets/tanji-welcome.png" alt="[碳吉寶寶歡迎圖片]" class="tanji-img-welcome" onerror="this.style.display='none'">
+        <img src="./assets/tanji-welcome.png" alt="" class="tanji-img-welcome" onerror="this.style.display='none'">
         <h2>歡迎進入碳吉 TanJi<br>永續投資導航</h2>
         
         <div class="system-intro">
@@ -140,14 +141,14 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
                 </div>
 
                 <div class="ai-box" style="margin-top: auto;">
-                    <div class="ai-content" id="aiSummaryText">載入 AI 模型洞察中...</div>
+                    <div class="ai-content" id="aiSummaryText"></div>
                 </div>
             </div>
 
             <div class="impact-card impact-col">
-                <div style="font-size: 16px; opacity: 0.9; letter-spacing: 1px;">您的投資影響力</div>
+                <div style="font-size: 18px; font-weight: bold; letter-spacing: 1px;">您的綠色影響力</div>
                 <div class="impact-number" id="impactTrees">0</div>
-                <div style="font-size: 16px; opacity: 0.9;">相當於種植樹木的年碳吸收潛力<br>(基準: 每百萬資金投入)</div>
+                <div style="font-size: 14px; opacity: 0.9; line-height: 1.5; padding: 0 10px;">（將百萬資金引導至此優良 ESG 企業，相較於投資傳統高碳排標的，每年約可減少等同於上述樹木吸收之碳排量）</div>
             </div>
 
         </div>
@@ -169,7 +170,7 @@ header p { margin: 8px 0 0 0; font-size: 15px; opacity: 0.9; }
     </div>
     
     <div class="fab" onclick="toggleChat()">
-        <img src="./assets/tanji-fab.png" alt="[呼叫碳吉]" class="tanji-img-fab" onerror="this.style.display='none'">
+        <img src="./assets/tanji-fab.png" alt="" class="tanji-img-fab" onerror="this.style.display='none'">
     </div>
 
     <footer class="disclaimer">
@@ -188,10 +189,10 @@ window.onload = async () => {
             companyData = await response.json();
             populateDatalist();
         } else {
-            document.getElementById('welcomeScreen').innerHTML += '<p style="color:red;">讀取 data.json 失敗，請確認檔案位置與伺服器設定。</p>';
+            document.getElementById('welcomeScreen').innerHTML += '<p style="color:#e74c3c; font-size:14px; margin-top:20px;">讀取 data.json 失敗，請確認檔案位置與伺服器設定。</p>';
         }
     } catch(e) {
-        document.getElementById('welcomeScreen').innerHTML += '<p style="color:red;">請透過伺服器環境 (如 Live Server) 開啟，以正確讀取 JSON 資料。</p>';
+        document.getElementById('welcomeScreen').innerHTML += '<p style="color:#e74c3c; font-size:14px; margin-top:20px;">請透過伺服器環境 (如 Live Server) 開啟，以正確讀取 JSON 資料。</p>';
     }
 };
 
@@ -302,7 +303,7 @@ function animateValue(id, start, end, duration) {
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        obj.innerHTML = Math.floor(progress * (end - start) + start) + '<span style="font-size:24px; margin-left:8px;">棵</span>';
+        obj.innerHTML = Math.floor(progress * (end - start) + start) + '<span style="font-size:24px; margin-left:8px;">棵樹</span>';
         if (progress < 1) {
             window.requestAnimationFrame(step);
         }
@@ -313,9 +314,9 @@ function animateValue(id, start, end, duration) {
 function generateAISummary(data) {
     const summaryBox = document.getElementById('aiSummaryText');
     let sentiment = data.tesg_rating.includes('A') || data.tesg_rating.includes('B+') ? '正向' : '保守';
-    let finDesc = data.eps > 3 ? '具備優異獲利能力' : (data.eps > 0 ? '獲利表現平穩' : '近期獲利面臨挑戰');
+    let finDesc = data.eps > 3 ? '獲利能力優異' : (data.eps > 0 ? '獲利表現平穩' : '近期獲利面臨挑戰');
     
-    let aiText = `根據系統推論，該企業綜合評等為 ${data.tesg_rating}。財務面 EPS 達 ${data.eps} 元，${finDesc}。結合環境分數分析，其綠色轉型動能判定為「<strong style="color:var(--primary-green)">${sentiment}</strong>」，建議納入永續投資觀察名單。`;
+    let aiText = `依據 TEJ 資料庫量化評估，該企業之 TESG 綜合評等為 ${data.tesg_rating}。在財務面，其 EPS 達 ${data.eps} 元，${finDesc}。綜合上述指標，本系統判定其綠色轉型動能為「<strong style="color:var(--primary-green)">${sentiment}</strong>」，建議納入永續投資觀察名單。`;
     
     summaryBox.innerHTML = aiText;
 }
